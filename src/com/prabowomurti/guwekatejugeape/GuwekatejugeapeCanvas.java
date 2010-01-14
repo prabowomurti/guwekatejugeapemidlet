@@ -1,4 +1,4 @@
-package com.prabowomurti;
+package com.prabowomurti.guwekatejugeape;
 
 /**
  *
@@ -6,30 +6,98 @@ package com.prabowomurti;
  */
 
 import javax.microedition.lcdui.*;
+import javax.microedition.midlet.MIDlet;
 
 public class GuwekatejugeapeCanvas extends Canvas{
 
+	GuwekatejugeapeMidlet midlet;
 	int w = getWidth();
 	int h = getHeight();
+	int keyCode;
 
-	String number;
+	String number = "";
+	int numberLength = 0;
+	int maxNumberLength = 18;
 	String words;
 
+	public GuwekatejugeapeCanvas (MIDlet midlet){
+		this.midlet = (GuwekatejugeapeMidlet) midlet;
+	}
+
 	public void keyPressed (int keyCode) {
-	
+		if (keyCode != 0 &&
+				keyCode != 42 &&
+				keyCode != 35 &&
+				((keyCode >= -8 && keyCode <= -5) || (keyCode >= 48 && keyCode <= 57))){
+			this.keyCode = keyCode;
+			repaint();
+		}
 	}
 
-	public int write (Graphics g, int y, String s) {
-		return 0;
-	}
-
-	public void paint (Graphics g) {
+	protected void paint (Graphics g) {
 		
 		clearScreen(g);
 		createMenu(g);
+
 		
+		switch (keyCode){
+			case 0:
+				return;
+			case -6://soft left key pressed
+				//showMenu(g);
+				midlet.exitMidlet();
+				break;
+			case -7://soft right key pressed
+				clearNumber(g);
+				break;
+			case -8: //clear key pressed
+				eraseNumber(g);
+				break;
+			case -5://select key pressed
+				writeNumber(g, this.number);
+				if (this.number.equals("")){
+					writeWords(g, "Simon said... number");
+				}else {
+					writeWords(g, numberToWords(this.number));
+				}
+				break;
+			default:
+				if (this.numberLength == 0 && keyCode == 48)
+					break;
+				if (this.numberLength >= this.maxNumberLength){
+					writeNumber(g, this.number);
+					writeWords(g, "Slow down, you're doing too much");
+					break;
+				}
+				this.numberLength ++;
+				this.number = this.number + getKeyName(keyCode);
+				writeNumber (g, this.number);
+				break;
+		}
 	}
 
+	public void writeNumber (Graphics g, String num) {
+		g.drawString(num, 10, 20, Graphics.LEFT | Graphics.TOP);
+	}
+
+	public void eraseNumber (Graphics g){
+		if (this.numberLength > 0){
+			this.number = this.number.substring(0, this.number.length()-1);
+			this.numberLength --;
+			writeNumber (g, this.number);
+		}
+	}
+	public void clearNumber(Graphics g) {
+		this.number = "";
+		this.numberLength = 0;
+		clearScreen(g);
+		createMenu(g);
+	}
+
+	public void writeWords(Graphics g, String w){
+		g.drawString(w, 10, 60, Graphics.LEFT | Graphics.TOP);
+	}
+	
 	public void clearScreen(Graphics g) {
 		g.setGrayScale(221);//#CCCCCC
 		g.fillRect (0, 0, w, h);
@@ -41,9 +109,13 @@ public class GuwekatejugeapeCanvas extends Canvas{
 		g.fillRect(0, h-20, w, 20);
 		
 		g.setGrayScale(0);
-		g.drawString("Menu", 0, h, Graphics.LEFT | Graphics.BOTTOM);
+		g.drawString("Exit", 0, h, Graphics.LEFT | Graphics.BOTTOM);
 		g.drawString("Convert", w/2, h, Graphics.HCENTER | Graphics.BOTTOM);
 		g.drawString("Clear", w, h, Graphics.RIGHT | Graphics.BOTTOM);
+	}
+
+	public void showMenu(Graphics g) {
+		
 	}
 
 	public String numberToWords(String num){
@@ -53,14 +125,11 @@ public class GuwekatejugeapeCanvas extends Canvas{
 		"juta",
 		"milyar",
 		"trilyun",
-		"ribu trilyun",
-		"juta trilyun",
-		"milyar trilyun",
-		"trilyun trilyun"};//whatever
+		"ribu trilyun"};//whatever
 		int unit = 0;
 
 		String addedWords, packet;
-		String words = "";
+		String word = "";
 		int lengthNum = num.length();
 		int hundreds, tens, ones;
 
@@ -78,9 +147,9 @@ public class GuwekatejugeapeCanvas extends Canvas{
 			tens = Integer.parseInt(packet.substring(1, 2));
 			ones = Integer.parseInt(packet.substring(0, 1));
 
-			//special case
+			//special cases
 			if (ones == 1 && tens == 0 && hundreds == 0 && (unit == 1 || unit == 5)){
-				words = "seribu " + words + " ";
+				word = "se" + unitName[unit] + " " + word + " ";
 				unit ++;
 				continue;
 			}else if (ones == 0 && tens == 0 && hundreds == 0){
@@ -114,11 +183,11 @@ public class GuwekatejugeapeCanvas extends Canvas{
 			}
 
 			//depend on unit
-			words = addedWords + " " + unitName[unit] + " " + words + " ";
+			word = addedWords + " " + unitName[unit] + " " + word + " ";
 			unit ++;
 		}
 
-		return words;
+		return word;
 	}
 
 	public String getNumName (int num){
@@ -147,4 +216,6 @@ public class GuwekatejugeapeCanvas extends Canvas{
 				return "";
 		}
 	}
+
+
 }
