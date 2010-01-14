@@ -1,0 +1,35 @@
+#~#~#~#~#~#~#~#~#
+     READ ME
+#~#~#~#~#~#~#~#~#
+
+_________________________________
+0. What is GuwekatejugeapeMidlet?
+	Yet another "fungsi terbilang" (a function that converts a number
+	into words (how to say it, in Bahasa Indonesia)) written in (you
+	guess) Java Micro Edition (J2ME)
+
+_____________
+1. How to use
+	If your mobile phone is MIDP 2.0 supported, copy the jar file
+	(guwekatejugeape.jar) into your phone's file system. Then install
+	it as usual. After installation, input the number using your
+	keypad, and press 'Convert'. How to read the number will be
+	displayed soon. To exit, press 'Exit' (left soft key) and to clear
+	the number, press 'Clear' (right soft key). You can erase the last
+	number you typed by pressing Cancel soft key on your keypad. There
+	is 18 digits limitation, so slow down, because this midlet is not
+	that good.
+
+__________
+2. LICENSE
+	GuwekatejugeapeMidlet is licensed under GPL v2. Read LICENSE.txt
+	for more details.
+
+___________________
+3. More Information
+	Visit http://github.com/sangprabo/guwekatejugeapemidlet/ OR if you
+	you can contact me by email : prabowo.murti "AT" gmail "DOT" com.
+	I promise I will reply it soon. Enjoy, and thanks for reading this
+	README, because most people just skip it, double click an *.exe
+	file, hoping they only click next-next-finish-button.
+	
