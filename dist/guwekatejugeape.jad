@@ -1,8 +1,8 @@
 MIDlet-1: GuwekatejugeapeMidlet, ,com.prabowomurti.guwekatejugeape.GuwekatejugeapeMidlet
-MIDlet-Jar-Size: 6998
+MIDlet-Jar-Size: 6977
 MIDlet-Jar-URL: guwekatejugeape.jar
 MIDlet-Name: guwekatejugeape
-MIDlet-Vendor: Vendor
-MIDlet-Version: 1.0
+MIDlet-Vendor: BangBowo Inc
+MIDlet-Version: 0.1
 MicroEdition-Configuration: CLDC-1.0
 MicroEdition-Profile: MIDP-2.0
