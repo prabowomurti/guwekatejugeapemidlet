@@ -40,10 +40,9 @@ public class GuwekatejugeapeCanvas extends Canvas{
 
 	protected void paint (Graphics g) {
 		
+		g.setFont (Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL));
 		clearScreen(g);
 		createMenu(g);
-		
-		g.setFont (Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL));
 		
 		switch (keyCode){
 			case 0:
