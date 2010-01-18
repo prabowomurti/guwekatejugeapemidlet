@@ -42,7 +42,8 @@ public class GuwekatejugeapeCanvas extends Canvas{
 		
 		clearScreen(g);
 		createMenu(g);
-
+		
+		g.setFont (Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL));
 		
 		switch (keyCode){
 			case 0:
@@ -101,9 +102,9 @@ public class GuwekatejugeapeCanvas extends Canvas{
 
 	public void writeWords(Graphics g, String word){
 		if (countWord(word) <= 2){
-			g.drawString(word, MARGIN_LEFT, 50, Graphics.LEFT | Graphics.TOP);
+			g.drawString(word, MARGIN_LEFT, 40, Graphics.LEFT | Graphics.TOP);
 		}else {
-			wrapText(g, word, MARGIN_LEFT, 50, w-MARGIN_LEFT-MARGIN_RIGHT);
+			wrapText(g, word, MARGIN_LEFT, 40, w-MARGIN_LEFT-MARGIN_RIGHT);
 		}
 	}
 
@@ -185,10 +186,6 @@ public class GuwekatejugeapeCanvas extends Canvas{
 		g.drawString("Exit", 0, h, Graphics.LEFT | Graphics.BOTTOM);
 		g.drawString("Convert", w/2, h, Graphics.HCENTER | Graphics.BOTTOM);
 		g.drawString("Clear", w, h, Graphics.RIGHT | Graphics.BOTTOM);
-	}
-
-	public void showMenu(Graphics g) {
-		
 	}
 
 	public String numberToWords(String num){
